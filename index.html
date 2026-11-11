@@ -10,508 +10,421 @@
 
 <style>
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  padding: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f4f6f8;
-  color: #17202a;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #111;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 950px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border: 2px solid black;
 }
 
 h1 {
-  text-align: center;
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
-  margin-bottom: 12px;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 10px;
 }
 
 .instruccions {
-  max-width: 850px;
-  margin: 0 auto 25px;
-  text-align: center;
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-
-.llegenda {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 25px;
-  margin: 20px auto;
-  font-weight: bold;
-}
-
-.blau {
-  color: #175cd3;
-  text-decoration: underline;
-  text-decoration-thickness: 4px;
-  text-underline-offset: 5px;
-  text-decoration-color: #175cd3;
-}
-
-.groc {
-  color: #17202a;
-  text-decoration: underline;
-  text-decoration-thickness: 4px;
-  text-underline-offset: 5px;
-  text-decoration-color: #f5c400;
-}
-
-.exercicis {
-  max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 30px;
+    line-height: 1.5;
 }
 
 .exercici {
-  background: white;
-  border: 2px solid #c8d0d9;
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 3px 8px rgba(0,0,0,.05);
+    border: 2px solid #222;
+    padding: 18px;
+    margin-bottom: 22px;
+    background: white;
 }
 
 .enunciat {
-  font-size: 1.5rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 20px;
+    font-size: 27px;
+    font-weight: bold;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
 }
 
-.numero {
-  background: #e4e7ec;
-  border-radius: 8px;
-  padding: 7px 12px;
-  font-size: 1.1rem;
+/* Efecte de retolador fluorescent */
+.blau {
+    background: linear-gradient(
+        transparent 35%,
+        rgba(70, 160, 255, 0.55) 35%,
+        rgba(70, 160, 255, 0.55) 90%,
+        transparent 90%
+    );
+    padding: 2px 4px;
+    border-radius: 3px;
 }
 
-.multiplicacio {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  flex-wrap: wrap;
+.groc {
+    background: linear-gradient(
+        transparent 35%,
+        rgba(255, 225, 50, 0.75) 35%,
+        rgba(255, 225, 50, 0.75) 90%,
+        transparent 90%
+    );
+    padding: 2px 4px;
+    border-radius: 3px;
 }
 
 .resultat {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  flex-wrap: wrap;
-  margin: 12px 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 15px;
 }
 
 .resultat input {
-  width: 100px;
-  height: 55px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  border-radius: 8px;
-  background: white;
+    width: 105px;
+    height: 58px;
+    font-size: 27px;
+    font-weight: bold;
+    text-align: center;
+    border: 3px solid black;
+    outline: none;
+    border-radius: 0;
 }
 
-.resultat .entrada-blava {
-  border: 3px solid #175cd3;
-  color: #175cd3;
-  text-decoration: underline;
-  text-decoration-color: #175cd3;
-  text-decoration-thickness: 3px;
-  text-underline-offset: 5px;
+.resultat input:first-child {
+    border-right: 1px solid #777;
 }
 
-.resultat .entrada-groga {
-  border: 3px solid #e5b900;
-  background: #fffbea;
-  color: #17202a;
-  text-decoration: underline;
-  text-decoration-color: #e5b900;
-  text-decoration-thickness: 3px;
-  text-underline-offset: 5px;
+.resultat input:last-child {
+    border-left: 1px solid #777;
 }
 
-.resultat input:focus {
-  outline: 3px solid #fdb022;
-  outline-offset: 2px;
+.resultat .zona-blava {
+    background: rgba(70, 160, 255, 0.22);
+    border-color: #2585d8;
 }
 
-.etiqueta-zona {
-  font-size: .9rem;
-  font-weight: bold;
-  margin-right: 5px;
+.resultat .zona-groga {
+    background: rgba(255, 225, 50, 0.30);
+    border-color: #d5b500;
+}
+
+.etiqueta-resultat {
+    font-size: 16px;
+    margin-bottom: 8px;
+    font-weight: bold;
 }
 
 .botons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 button {
-  border: 0;
-  border-radius: 9px;
-  padding: 12px 17px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: 2px solid black;
+    cursor: pointer;
+    background: white;
 }
 
-.corregir {
-  background: #175cd3;
-  color: white;
-}
-
-.reiniciar {
-  background: #e4e7ec;
-  color: #17202a;
-}
-
-button:focus-visible {
-  outline: 4px solid #fdb022;
-  outline-offset: 3px;
-}
-
-.missatge {
-  min-height: 28px;
-  font-weight: bold;
-  font-size: 1.05rem;
-  margin-top: 12px;
+button:hover {
+    background: #eaeaea;
 }
 
 .correcte {
-  color: #16794b;
+    background: #c8f2c8;
+    border: 3px solid green;
 }
 
 .incorrecte {
-  color: #b42318;
+    background: #ffd1d1;
+    border: 3px solid red;
 }
 
-.exercici.resolt {
-  border: 3px solid #16794b;
+.missatge {
+    font-size: 19px;
+    font-weight: bold;
+    margin-top: 12px;
+    min-height: 24px;
 }
 
-.resum {
-  max-width: 900px;
-  margin: 25px auto;
-  text-align: center;
-  background: white;
-  border: 2px solid #c8d0d9;
-  border-radius: 12px;
-  padding: 18px;
-  font-size: 1.1rem;
-  font-weight: bold;
+#resum {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin: 30px 0;
 }
 
-#pdf {
-  display: block;
-  margin: 25px auto;
-  background: #16794b;
-  color: white;
-  padding: 16px 22px;
-  font-size: 1.1rem;
+.pdf {
+    display: block;
+    margin: 25px auto 0;
+    background: #222;
+    color: white;
+    padding: 16px 25px;
+    font-size: 20px;
 }
 
-@media(max-width: 550px) {
-  body {
-    padding: 12px;
-  }
+.llegenda {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    font-size: 17px;
+}
 
-  .exercici {
-    padding: 14px;
-  }
+.llegenda span {
+    padding: 5px 9px;
+    font-weight: bold;
+}
 
-  .enunciat {
-    font-size: 1.3rem;
-  }
+@media (max-width: 600px) {
+    .container {
+        padding: 12px;
+    }
 
-  .resultat input {
-    width: 85px;
-  }
+    .enunciat {
+        font-size: 23px;
+    }
+
+    .resultat input {
+        width: 85px;
+        height: 55px;
+        font-size: 23px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<h1>MULTIPLIQUEM PER 10, 100, 1.000...</h1>
+<div class="container">
+
+<h1>MULTIPLIQUEM PER 10, 100, 1000...</h1>
 
 <div class="instruccions">
-  <p>
-    OBSERVA ELS COLORS I COMPLETA EL RESULTAT.
-  </p>
-  <p>
-    EL NOMBRE BLAU ES MANTÉ IGUAL.<br>
-    ELS ZEROS GROCS S'AFEGEIXEN AL FINAL.
-  </p>
+    OBSERVA ELS NOMBRES I COMPLETA EL RESULTAT.<br>
+    ESCRIU EL PRIMER NOMBRE A LA CASELLA BLAVA<br>
+    I AFEGEIX ELS ZEROS A LA CASELLA GROGA.
 </div>
 
 <div class="llegenda">
-  <div><span class="blau">PRIMER NOMBRE</span></div>
-  <div><span class="groc">ZEROS</span></div>
+    <span class="blau">PRIMER NOMBRE</span>
+    <span class="groc">ZEROS QUE AFEGIM</span>
 </div>
 
-<main class="exercicis" id="exercicis"></main>
+<div id="exercicis"></div>
 
-<div class="resum">
-  EXERCICIS CORRECTES: <span id="correctes">0</span> / 10
+<div id="resum"></div>
+
+<button class="pdf" onclick="descarregarPDF()">
+    DESCARREGAR RESULTATS EN PDF
+</button>
+
 </div>
-
-<button id="pdf">DESCARREGAR RESULTATS EN PDF</button>
 
 <script>
-const exercicis = [
-  { primer: "23", zeros: 1 },
-  { primer: "45", zeros: 2 },
-  { primer: "7", zeros: 3 },
-  { primer: "32", zeros: 4 },
-  { primer: "125", zeros: 1 },
-  { primer: "54", zeros: 3 },
-  { primer: "8", zeros: 2 },
-  { primer: "216", zeros: 2 },
-  { primer: "43", zeros: 5 },
-  { primer: "12", zeros: 4 }
+
+const dades = [
+    {a: "23", b: 10},
+    {a: "45", b: 100},
+    {a: "7", b: 1000},
+    {a: "32", b: 10000},
+    {a: "125", b: 10},
+    {a: "54", b: 1000},
+    {a: "8", b: 100},
+    {a: "216", b: 100},
+    {a: "43", b: 100000},
+    {a: "12", b: 10000}
 ];
 
-const contenidor = document.getElementById("exercicis");
+const resultats = [];
 
-let resultats = [];
+function crearExercicis() {
+    const contenidor = document.getElementById("exercicis");
 
-function crearActivitats() {
-  contenidor.innerHTML = "";
+    dades.forEach((d, i) => {
+        const zeros = d.b.toString().length - 1;
+        const correcte = d.a + "0".repeat(zeros);
 
-  resultats = exercicis.map((ex, index) => ({
-    exercici: index + 1,
-    operacio: ex.primer + " x 1" + "0".repeat(ex.zeros),
-    resposta: "",
-    estat: "PENDENT"
-  }));
+        resultats[i] = {
+            resposta1: "",
+            resposta2: "",
+            estat: "PENDENT",
+            correcte: correcte
+        };
 
-  exercicis.forEach((ex, index) => {
-    const numero = "1" + "0".repeat(ex.zeros);
+        const exercici = document.createElement("div");
+        exercici.className = "exercici";
+        exercici.id = "ex" + i;
 
-    const bloc = document.createElement("section");
-    bloc.className = "exercici";
+        exercici.innerHTML = `
+            <div class="enunciat">
+                ${i + 1}. 
+                <span class="blau">${d.a}</span>
+                ×
+                <span>${d.b.toString().slice(0, 1)}<span class="groc">${"0".repeat(zeros)}</span></span>
+                =
+            </div>
 
-    bloc.innerHTML = `
-      <div class="enunciat">
-        <span class="numero">${index + 1}</span>
+            <div class="etiqueta-resultat">
+                ESCRIU EL RESULTAT:
+            </div>
 
-        <div class="multiplicacio">
-          <span class="blau">${ex.primer}</span>
-          <span>×</span>
-          <span>1<span class="groc">${"0".repeat(ex.zeros)}</span></span>
-          <span>=</span>
-        </div>
-      </div>
+            <div class="resultat">
+                <input
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="6"
+                    id="r1_${i}"
+                    class="zona-blava"
+                    aria-label="Primer nombre de la resposta"
+                >
+                <input
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="6"
+                    id="r2_${i}"
+                    class="zona-groga"
+                    aria-label="Zeros que afegim"
+                >
+            </div>
 
-      <div class="etiqueta-zona">
-        ESCRIU EL RESULTAT:
-      </div>
+            <div class="botons">
+                <button onclick="corregir(${i})">CORREGIR</button>
+                <button onclick="reiniciar(${i})">TORNAR A COMENÇAR</button>
+            </div>
 
-      <div class="resultat">
-        <input
-          class="entrada-blava"
-          type="text"
-          inputmode="numeric"
-          maxlength="8"
-          aria-label="Primer nombre del resultat"
-          placeholder="NOMBRE"
-        >
+            <div class="missatge" id="m${i}"></div>
+        `;
 
-        <span style="font-size:1.5rem;font-weight:bold;">+</span>
+        contenidor.appendChild(exercici);
+    });
 
-        <input
-          class="entrada-groga"
-          type="text"
-          inputmode="numeric"
-          maxlength="8"
-          aria-label="Zeros del resultat"
-          placeholder="ZEROS"
-        >
-      </div>
+    actualitzarResum();
+}
 
-      <div class="botons">
-        <button class="corregir" type="button">CORREGIR</button>
-        <button class="reiniciar" type="button">TORNAR A COMENÇAR</button>
-      </div>
+function corregir(i) {
+    const resposta1 = document.getElementById("r1_" + i).value.trim();
+    const resposta2 = document.getElementById("r2_" + i).value.trim();
 
-      <div class="missatge" aria-live="polite"></div>
-    `;
+    const correcte1 = dades[i].a;
+    const zeros = dades[i].b.toString().length - 1;
+    const correcte2 = "0".repeat(zeros);
 
-    const camps = bloc.querySelectorAll("input");
-    const campBlau = camps[0];
-    const campGroc = camps[1];
-    const missatge = bloc.querySelector(".missatge");
-    const botoCorregir = bloc.querySelector(".corregir");
-    const botoReiniciar = bloc.querySelector(".reiniciar");
+    const missatge = document.getElementById("m" + i);
+    const exercici = document.getElementById("ex" + i);
 
-    function corregir() {
-      const respostaBlava = campBlau.value.trim();
-      const respostaGroga = campGroc.value.trim();
+    resultats[i].resposta1 = resposta1;
+    resultats[i].resposta2 = resposta2;
 
-      if (respostaBlava === "" || respostaGroga === "") {
-        missatge.textContent = "COMPLETA LES DUES CASELLES!";
-        missatge.className = "missatge incorrecte";
-        return;
-      }
-
-      const correctaBlava = ex.primer;
-      const correctaGroga = "0".repeat(ex.zeros);
-
-      const encertat =
-        respostaBlava === correctaBlava &&
-        respostaGroga === correctaGroga;
-
-      resultats[index].resposta =
-        respostaBlava + respostaGroga;
-
-      if (encertat) {
+    if (resposta1 === correcte1 && resposta2 === correcte2) {
+        resultats[i].estat = "CORRECTE";
         missatge.textContent = "MOLT BÉ! RESULTAT CORRECTE!";
-        missatge.className = "missatge correcte";
-        bloc.classList.add("resolt");
-
-        resultats[index].estat = "CORRECTE";
-
-        campBlau.disabled = true;
-        campGroc.disabled = true;
-      } else {
-        missatge.textContent = "ENCARA NO ÉS CORRECTE. TORNA-HO A PROVAR!";
-        missatge.className = "missatge incorrecte";
-
-        resultats[index].estat = "INCORRECTE";
-      }
-
-      actualitzaResum();
+        missatge.style.color = "green";
+        exercici.classList.add("correcte");
+        exercici.classList.remove("incorrecte");
+    } else {
+        resultats[i].estat = "INCORRECTE";
+        missatge.textContent = "TORNA-HO A PROVAR!";
+        missatge.style.color = "red";
+        exercici.classList.add("incorrecte");
+        exercici.classList.remove("correcte");
     }
 
-    function reiniciar() {
-      campBlau.value = "";
-      campGroc.value = "";
-
-      campBlau.disabled = false;
-      campGroc.disabled = false;
-
-      missatge.textContent = "";
-      missatge.className = "missatge";
-
-      bloc.classList.remove("resolt");
-
-      resultats[index].resposta = "";
-      resultats[index].estat = "PENDENT";
-
-      actualitzaResum();
-    }
-
-    botoCorregir.addEventListener("click", corregir);
-    botoReiniciar.addEventListener("click", reiniciar);
-
-    contenidor.appendChild(bloc);
-  });
-
-  actualitzaResum();
+    actualitzarResum();
 }
 
-function actualitzaResum() {
-  const correctes = resultats.filter(
-    r => r.estat === "CORRECTE"
-  ).length;
+function reiniciar(i) {
+    document.getElementById("r1_" + i).value = "";
+    document.getElementById("r2_" + i).value = "";
 
-  document.getElementById("correctes").textContent = correctes;
+    document.getElementById("m" + i).textContent = "";
+
+    const exercici = document.getElementById("ex" + i);
+    exercici.classList.remove("correcte", "incorrecte");
+
+    resultats[i].resposta1 = "";
+    resultats[i].resposta2 = "";
+    resultats[i].estat = "PENDENT";
+
+    actualitzarResum();
 }
 
-document.getElementById("pdf").addEventListener("click", () => {
-  if (!window.jspdf) {
-    alert("NO S'HA POGUT CARREGAR EL PDF. TORNA-HO A PROVAR.");
-    return;
-  }
+function actualitzarResum() {
+    const correctes = resultats.filter(r => r.estat === "CORRECTE").length;
 
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+    document.getElementById("resum").textContent =
+        "EXERCICIS CORRECTES: " + correctes + " / " + dades.length;
+}
 
-  let y = 20;
-
-  const correctes = resultats.filter(
-    r => r.estat === "CORRECTE"
-  ).length;
-
-  const incorrectes = resultats.filter(
-    r => r.estat === "INCORRECTE"
-  ).length;
-
-  const pendents = resultats.filter(
-    r => r.estat === "PENDENT"
-  ).length;
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(17);
-  doc.text("RESULTATS DE LES MULTIPLICACIONS", 15, y);
-
-  y += 12;
-
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(11);
-  doc.text("Multiplicar per 10, 100, 1000...", 15, y);
-
-  y += 8;
-  doc.text("Data: " + new Date().toLocaleDateString("ca-ES"), 15, y);
-
-  y += 14;
-
-  doc.setFont("helvetica", "bold");
-  doc.text("RESUM", 15, y);
-
-  y += 8;
-
-  doc.setFont("helvetica", "normal");
-  doc.text("Correctes: " + correctes + " de 10", 15, y);
-
-  y += 7;
-  doc.text("Incorrectes: " + incorrectes, 15, y);
-
-  y += 7;
-  doc.text("Pendents: " + pendents, 15, y);
-
-  y += 14;
-
-  doc.setFont("helvetica", "bold");
-  doc.text("RESULTATS DE CADA EXERCICI", 15, y);
-
-  y += 10;
-
-  resultats.forEach((r, index) => {
-    if (y > 275) {
-      doc.addPage();
-      y = 20;
-    }
-
-    const ex = exercicis[index];
-    const operacio = ex.primer + " x " + "1" + "0".repeat(ex.zeros);
+function descarregarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
 
     doc.setFont("helvetica", "bold");
-    doc.text((index + 1) + ". " + operacio, 15, y);
-
-    y += 6;
+    doc.setFontSize(18);
+    doc.text("RESULTATS: MULTIPLICACIONS", 15, 20);
 
     doc.setFont("helvetica", "normal");
-    doc.text("Resposta: " + (r.resposta || "Sense resposta"), 20, y);
+    doc.setFontSize(11);
 
-    y += 6;
-    doc.text("Resultat: " + r.estat, 20, y);
+    let y = 32;
 
+    const correctes = resultats.filter(r => r.estat === "CORRECTE").length;
+    const incorrectes = resultats.filter(r => r.estat === "INCORRECTE").length;
+    const pendents = resultats.filter(r => r.estat === "PENDENT").length;
+
+    doc.text("Exercicis correctes: " + correctes, 15, y);
+    y += 7;
+    doc.text("Exercicis incorrectes: " + incorrectes, 15, y);
+    y += 7;
+    doc.text("Exercicis pendents: " + pendents, 15, y);
+    y += 12;
+
+    doc.setFont("helvetica", "bold");
+    doc.text("DETALL DELS EXERCICIS", 15, y);
     y += 9;
-  });
 
-  doc.save("resultats_multiplicacions.pdf");
-});
+    doc.setFont("helvetica", "normal");
 
-crearActivitats();
+    dades.forEach((d, i) => {
+        if (y > 270) {
+            doc.addPage();
+            y = 20;
+        }
+
+        const r = resultats[i];
+        const resposta = (r.resposta1 || "(buit)") + (r.resposta2 || "");
+
+        doc.text(
+            (i + 1) + ". " + d.a + " x " + d.b +
+            " = " + resposta +
+            "  |  " + r.estat,
+            15,
+            y
+        );
+
+        y += 9;
+    });
+
+    doc.save("resultats_multiplicacions.pdf");
+}
+
+crearExercicis();
+
 </script>
 
 </body>
