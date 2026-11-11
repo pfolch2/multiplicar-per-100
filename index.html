@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MULTIPLIQUEM PER 10, 100, 1000...</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  color: #17202a;
+}
+
+h1 {
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  margin-bottom: 12px;
+}
+
+.instruccions {
+  max-width: 850px;
+  margin: 0 auto 25px;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.llegenda {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin: 20px auto;
+  font-weight: bold;
+}
+
+.blau {
+  color: #175cd3;
+  text-decoration: underline;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 5px;
+  text-decoration-color: #175cd3;
+}
+
+.groc {
+  color: #17202a;
+  text-decoration: underline;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 5px;
+  text-decoration-color: #f5c400;
+}
+
+.exercicis {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.exercici {
+  background: white;
+  border: 2px solid #c8d0d9;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 3px 8px rgba(0,0,0,.05);
+}
+
+.enunciat {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.numero {
+  background: #e4e7ec;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 1.1rem;
+}
+
+.multiplicacio {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.resultat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin: 12px 0 18px;
+}
+
+.resultat input {
+  width: 100px;
+  height: 55px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 8px;
+  background: white;
+}
+
+.resultat .entrada-blava {
+  border: 3px solid #175cd3;
+  color: #175cd3;
+  text-decoration: underline;
+  text-decoration-color: #175cd3;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 5px;
+}
+
+.resultat .entrada-groga {
+  border: 3px solid #e5b900;
+  background: #fffbea;
+  color: #17202a;
+  text-decoration: underline;
+  text-decoration-color: #e5b900;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 5px;
+}
+
+.resultat input:focus {
+  outline: 3px solid #fdb022;
+  outline-offset: 2px;
+}
+
+.etiqueta-zona {
+  font-size: .9rem;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.botons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+button {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 17px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.corregir {
+  background: #175cd3;
+  color: white;
+}
+
+.reiniciar {
+  background: #e4e7ec;
+  color: #17202a;
+}
+
+button:focus-visible {
+  outline: 4px solid #fdb022;
+  outline-offset: 3px;
+}
+
+.missatge {
+  min-height: 28px;
+  font-weight: bold;
+  font-size: 1.05rem;
+  margin-top: 12px;
+}
+
+.correcte {
+  color: #16794b;
+}
+
+.incorrecte {
+  color: #b42318;
+}
+
+.exercici.resolt {
+  border: 3px solid #16794b;
+}
+
+.resum {
+  max-width: 900px;
+  margin: 25px auto;
+  text-align: center;
+  background: white;
+  border: 2px solid #c8d0d9;
+  border-radius: 12px;
+  padding: 18px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+#pdf {
+  display: block;
+  margin: 25px auto;
+  background: #16794b;
+  color: white;
+  padding: 16px 22px;
+  font-size: 1.1rem;
+}
+
+@media(max-width: 550px) {
+  body {
+    padding: 12px;
+  }
+
+  .exercici {
+    padding: 14px;
+  }
+
+  .enunciat {
+    font-size: 1.3rem;
+  }
+
+  .resultat input {
+    width: 85px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<h1>MULTIPLIQUEM PER 10, 100, 1.000...</h1>
+
+<div class="instruccions">
+  <p>
+    OBSERVA ELS COLORS I COMPLETA EL RESULTAT.
+  </p>
+  <p>
+    EL NOMBRE BLAU ES MANTÉ IGUAL.<br>
+    ELS ZEROS GROCS S'AFEGEIXEN AL FINAL.
+  </p>
+</div>
+
+<div class="llegenda">
+  <div><span class="blau">PRIMER NOMBRE</span></div>
+  <div><span class="groc">ZEROS</span></div>
+</div>
+
+<main class="exercicis" id="exercicis"></main>
+
+<div class="resum">
+  EXERCICIS CORRECTES: <span id="correctes">0</span> / 10
+</div>
+
+<button id="pdf">DESCARREGAR RESULTATS EN PDF</button>
+
+<script>
+const exercicis = [
+  { primer: "23", zeros: 1 },
+  { primer: "45", zeros: 2 },
+  { primer: "7", zeros: 3 },
+  { primer: "32", zeros: 4 },
+  { primer: "125", zeros: 1 },
+  { primer: "54", zeros: 3 },
+  { primer: "8", zeros: 2 },
+  { primer: "216", zeros: 2 },
+  { primer: "43", zeros: 5 },
+  { primer: "12", zeros: 4 }
+];
+
+const contenidor = document.getElementById("exercicis");
+
+let resultats = [];
+
+function crearActivitats() {
+  contenidor.innerHTML = "";
+
+  resultats = exercicis.map((ex, index) => ({
+    exercici: index + 1,
+    operacio: ex.primer + " x 1" + "0".repeat(ex.zeros),
+    resposta: "",
+    estat: "PENDENT"
+  }));
+
+  exercicis.forEach((ex, index) => {
+    const numero = "1" + "0".repeat(ex.zeros);
+
+    const bloc = document.createElement("section");
+    bloc.className = "exercici";
+
+    bloc.innerHTML = `
+      <div class="enunciat">
+        <span class="numero">${index + 1}</span>
+
+        <div class="multiplicacio">
+          <span class="blau">${ex.primer}</span>
+          <span>×</span>
+          <span>1<span class="groc">${"0".repeat(ex.zeros)}</span></span>
+          <span>=</span>
+        </div>
+      </div>
+
+      <div class="etiqueta-zona">
+        ESCRIU EL RESULTAT:
+      </div>
+
+      <div class="resultat">
+        <input
+          class="entrada-blava"
+          type="text"
+          inputmode="numeric"
+          maxlength="8"
+          aria-label="Primer nombre del resultat"
+          placeholder="NOMBRE"
+        >
+
+        <span style="font-size:1.5rem;font-weight:bold;">+</span>
+
+        <input
+          class="entrada-groga"
+          type="text"
+          inputmode="numeric"
+          maxlength="8"
+          aria-label="Zeros del resultat"
+          placeholder="ZEROS"
+        >
+      </div>
+
+      <div class="botons">
+        <button class="corregir" type="button">CORREGIR</button>
+        <button class="reiniciar" type="button">TORNAR A COMENÇAR</button>
+      </div>
+
+      <div class="missatge" aria-live="polite"></div>
+    `;
+
+    const camps = bloc.querySelectorAll("input");
+    const campBlau = camps[0];
+    const campGroc = camps[1];
+    const missatge = bloc.querySelector(".missatge");
+    const botoCorregir = bloc.querySelector(".corregir");
+    const botoReiniciar = bloc.querySelector(".reiniciar");
+
+    function corregir() {
+      const respostaBlava = campBlau.value.trim();
+      const respostaGroga = campGroc.value.trim();
+
+      if (respostaBlava === "" || respostaGroga === "") {
+        missatge.textContent = "COMPLETA LES DUES CASELLES!";
+        missatge.className = "missatge incorrecte";
+        return;
+      }
+
+      const correctaBlava = ex.primer;
+      const correctaGroga = "0".repeat(ex.zeros);
+
+      const encertat =
+        respostaBlava === correctaBlava &&
+        respostaGroga === correctaGroga;
+
+      resultats[index].resposta =
+        respostaBlava + respostaGroga;
+
+      if (encertat) {
+        missatge.textContent = "MOLT BÉ! RESULTAT CORRECTE!";
+        missatge.className = "missatge correcte";
+        bloc.classList.add("resolt");
+
+        resultats[index].estat = "CORRECTE";
+
+        campBlau.disabled = true;
+        campGroc.disabled = true;
+      } else {
+        missatge.textContent = "ENCARA NO ÉS CORRECTE. TORNA-HO A PROVAR!";
+        missatge.className = "missatge incorrecte";
+
+        resultats[index].estat = "INCORRECTE";
+      }
+
+      actualitzaResum();
+    }
+
+    function reiniciar() {
+      campBlau.value = "";
+      campGroc.value = "";
+
+      campBlau.disabled = false;
+      campGroc.disabled = false;
+
+      missatge.textContent = "";
+      missatge.className = "missatge";
+
+      bloc.classList.remove("resolt");
+
+      resultats[index].resposta = "";
+      resultats[index].estat = "PENDENT";
+
+      actualitzaResum();
+    }
+
+    botoCorregir.addEventListener("click", corregir);
+    botoReiniciar.addEventListener("click", reiniciar);
+
+    contenidor.appendChild(bloc);
+  });
+
+  actualitzaResum();
+}
+
+function actualitzaResum() {
+  const correctes = resultats.filter(
+    r => r.estat === "CORRECTE"
+  ).length;
+
+  document.getElementById("correctes").textContent = correctes;
+}
+
+document.getElementById("pdf").addEventListener("click", () => {
+  if (!window.jspdf) {
+    alert("NO S'HA POGUT CARREGAR EL PDF. TORNA-HO A PROVAR.");
+    return;
+  }
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  let y = 20;
+
+  const correctes = resultats.filter(
+    r => r.estat === "CORRECTE"
+  ).length;
+
+  const incorrectes = resultats.filter(
+    r => r.estat === "INCORRECTE"
+  ).length;
+
+  const pendents = resultats.filter(
+    r => r.estat === "PENDENT"
+  ).length;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(17);
+  doc.text("RESULTATS DE LES MULTIPLICACIONS", 15, y);
+
+  y += 12;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(11);
+  doc.text("Multiplicar per 10, 100, 1000...", 15, y);
+
+  y += 8;
+  doc.text("Data: " + new Date().toLocaleDateString("ca-ES"), 15, y);
+
+  y += 14;
+
+  doc.setFont("helvetica", "bold");
+  doc.text("RESUM", 15, y);
+
+  y += 8;
+
+  doc.setFont("helvetica", "normal");
+  doc.text("Correctes: " + correctes + " de 10", 15, y);
+
+  y += 7;
+  doc.text("Incorrectes: " + incorrectes, 15, y);
+
+  y += 7;
+  doc.text("Pendents: " + pendents, 15, y);
+
+  y += 14;
+
+  doc.setFont("helvetica", "bold");
+  doc.text("RESULTATS DE CADA EXERCICI", 15, y);
+
+  y += 10;
+
+  resultats.forEach((r, index) => {
+    if (y > 275) {
+      doc.addPage();
+      y = 20;
+    }
+
+    const ex = exercicis[index];
+    const operacio = ex.primer + " x " + "1" + "0".repeat(ex.zeros);
+
+    doc.setFont("helvetica", "bold");
+    doc.text((index + 1) + ". " + operacio, 15, y);
+
+    y += 6;
+
+    doc.setFont("helvetica", "normal");
+    doc.text("Resposta: " + (r.resposta || "Sense resposta"), 20, y);
+
+    y += 6;
+    doc.text("Resultat: " + r.estat, 20, y);
+
+    y += 9;
+  });
+
+  doc.save("resultats_multiplicacions.pdf");
+});
+
+crearActivitats();
+</script>
+
+</body>
+</html>
